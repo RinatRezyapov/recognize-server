@@ -5,7 +5,7 @@ const configPassport_1 = require("./config/configPassport");
 const configApp_1 = require("./config/configApp");
 const configRouter_1 = require("./config/configRouter");
 const configWebSocket_1 = require("./config/configWebSocket");
-const port = process.env.PORT || 3001;
+const port = 443;
 configMongoose_1.mongooseConnect();
 const app = configApp_1.configApp();
 const passport = configPassport_1.configPassport();
