@@ -3,7 +3,7 @@ import { configPassport } from './config/configPassport';
 import { configApp } from './config/configApp';
 import { configRouter } from './config/configRouter';
 import { configWebSocket } from './config/configWebSocket';
-const port = 443;
+const port = process.env.PORT || 80;
 
 mongooseConnect();
 
