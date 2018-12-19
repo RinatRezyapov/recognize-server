@@ -1,6 +1,9 @@
 {
     "name": "node-authentication",
     "main": "server.js",
+    "engines": {
+        "node": "8.6.0"
+    },
     "scripts": {
         "build": "tsc",
         "dev": "ts-node ./app/server.ts",
