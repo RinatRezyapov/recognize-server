@@ -9,7 +9,7 @@ import { fromNullable } from 'fp-ts/lib/Option';
 import { ServerResponse } from '../api/entities';
 
 export const configWebSocket = () => {
-  const wss = new ws.Server({ port: 443 });
+  const wss = new ws.Server({ port: 3000 });
 
   wss.on('connection', (ws: WebSocket) => {
     ws.on('message', (msg: WebSocket.Data) => {
