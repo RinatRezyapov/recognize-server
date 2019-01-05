@@ -14,7 +14,6 @@ const router = configRouter(passport);
 
 server.use(passport.initialize());
 server.use('/', router);
-server.listen(port);
 
 server.listen(port, () => console.log(`Listening on ${ port }`));
 

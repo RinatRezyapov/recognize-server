@@ -13,7 +13,6 @@ const passport = configPassport_1.configPassport();
 const router = configRouter_1.configRouter(passport);
 server.use(passport.initialize());
 server.use('/', router);
-server.listen(port);
 server.listen(port, () => console.log(`Listening on ${port}`));
 configWebSocket_1.configWebSocket(server);
 //# sourceMappingURL=server.js.map
