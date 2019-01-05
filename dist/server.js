@@ -1,38 +1,17 @@
-/*import { mongooseConnect } from './config/configMongoose';
-import { configPassport } from './config/configPassport';
-import { configApp } from './config/configApp';
-import { configRouter } from './config/configRouter';
-import { configWebSocket } from './config/configWebSocket';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const configMongoose_1 = require("./config/configMongoose");
+const configPassport_1 = require("./config/configPassport");
+const configApp_1 = require("./config/configApp");
+const configRouter_1 = require("./config/configRouter");
+const configWebSocket_1 = require("./config/configWebSocket");
 const port = process.env.PORT || 80;
-
-mongooseConnect();
-
-const app = configApp();
-const passport = configPassport();
-const router = configRouter(passport);
-
+configMongoose_1.mongooseConnect();
+const app = configApp_1.configApp();
+const passport = configPassport_1.configPassport();
+const router = configRouter_1.configRouter(passport);
 app.use(passport.initialize());
 app.use('/', router);
 app.listen(port);
-
-configWebSocket(app);*/
-'use strict';
-const express = require('express');
-const SocketServer = require('ws').Server;
-const path = require('path');
-const PORT = process.env.PORT || 3000;
-const INDEX = path.join(__dirname, 'index.html');
-const server = express()
-    .use((req, res) => res.sendFile(INDEX))
-    .listen(PORT, () => console.log(`Listening on ${PORT}`));
-const wss = new SocketServer({ server });
-wss.on('connection', (ws) => {
-    console.log('Client connected');
-    ws.on('close', () => console.log('Client disconnected'));
-});
-setInterval(() => {
-    wss.clients.forEach((client) => {
-        client.send(new Date().toTimeString());
-    });
-}, 1000);
+configWebSocket_1.configWebSocket(app);
 //# sourceMappingURL=server.js.map
