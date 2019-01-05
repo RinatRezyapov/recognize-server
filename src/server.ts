@@ -15,4 +15,4 @@ app.use(passport.initialize());
 app.use('/', router);
 app.listen(port);
 
-configWebSocket();
+configWebSocket(app);

@@ -8,8 +8,8 @@ import { handleUserCommand } from '../commandHandlers/user';
 import { fromNullable } from 'fp-ts/lib/Option';
 import { ServerResponse } from '../api/entities';
 
-export const configWebSocket = () => {
-  const wss = new ws.Server({ port: 3000 });
+export const configWebSocket = (server) => {
+  const wss = new ws.Server({ server });
 
   wss.on('connection', (ws: WebSocket) => {
     ws.on('message', (msg: WebSocket.Data) => {
