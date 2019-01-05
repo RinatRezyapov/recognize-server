@@ -6,8 +6,8 @@ const user_1 = require("../api/protocol/user");
 const courses_2 = require("../commandHandlers/courses");
 const user_2 = require("../commandHandlers/user");
 const Option_1 = require("fp-ts/lib/Option");
-exports.configWebSocket = () => {
-    const wss = new ws.Server({ port: 3000 });
+exports.configWebSocket = (server) => {
+    const wss = new ws.Server({ server });
     wss.on('connection', (ws) => {
         ws.on('message', (msg) => {
             const parsedMsg = JSON.parse(msg);
