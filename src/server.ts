@@ -8,15 +8,14 @@ const express = require('express');
 
 mongooseConnect();
 
-/*const app = configApp();
+const server = configApp();
 const passport = configPassport();
 const router = configRouter(passport);
 
-app.use(passport.initialize());
-app.use('/', router);
-app.listen(port);*/
+server.use(passport.initialize());
+server.use('/', router);
+server.listen(port);
 
-const server = express()
-  .listen(port, () => console.log(`Listening on ${ port }`));
+server.listen(port, () => console.log(`Listening on ${ port }`));
 
 configWebSocket(server);
