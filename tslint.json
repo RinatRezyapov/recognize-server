@@ -14,7 +14,6 @@
     "jsx-wrap-multiline": true,
     "jsx-space-before-trailing-slash": true,
     "no-angle-bracket-type-assertion": false,
-
     "member-access": false,
     "ordered-imports": false,
     "only-arrow-functions": false,
@@ -62,6 +61,6 @@
     "no-unnecessary-type-assertion": true,
     "whitespace": true,
     "no-submodule-imports": false,
-    "max-classes-per-file": false,
+    "max-classes-per-file": false
   }
 }

@@ -9,7 +9,7 @@ export default class Course extends ProtocolObject {
   name: Option<string>;
   data: Option<string>;
   owner: Id<User>;
-  picture: Option<string>;
+  picture: Option<Id<File>>;
   description: Option<string>;
   shortDescription: Option<string>;
   tags: Option<string>;
@@ -36,7 +36,7 @@ export default class Course extends ProtocolObject {
     name: Option<string>;
     data: Option<string>;
     owner: Id<User>;
-    picture: Option<string>;
+    picture: Option<Id<File>>;
     description: Option<string>;
     shortDescription: Option<string>;
     tags: Option<string>;

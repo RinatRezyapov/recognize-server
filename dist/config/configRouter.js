@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const jwt = require("jsonwebtoken");
-exports.SECRET = 'server secret';
-exports.TOKENTIME = 120 * 60;
+const SECRET = 'server secret';
+const TOKENTIME = 120 * 60;
 exports.configRouter = (passport) => {
     const router = express.Router();
     router.post('/login', passport.authenticate('local-login', {
@@ -23,7 +23,7 @@ exports.configRouter = (passport) => {
     return router;
 };
 const generateToken = (req, res, next) => {
-    req.token = jwt.sign({ id: req.user.id }, exports.SECRET, { expiresIn: exports.TOKENTIME });
+    req.token = jwt.sign({ id: req.user.id }, SECRET, { expiresIn: TOKENTIME });
     next();
 };
 const respond = (req, res) => __awaiter(this, void 0, void 0, function* () {

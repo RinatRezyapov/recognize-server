@@ -14,9 +14,21 @@ export class Request extends ProtocolCommand {
   }
 }
 
+export class List extends ProtocolCommand {
+  constructor() {
+    super('User', 'List');
+  }
+}
+
+export class ListById extends ProtocolCommand {
+    constructor({ userIds }: { userIds: Array<Id<User>> }) {
+      super('User', 'ListById', { userIds });
+    }
+}
+
 export class Update extends ProtocolCommand {
-  constructor({ courseMe }: { courseMe: ME<User> }) {
-    super('User', 'Update', { courseMe })
+  constructor({ userMe }: { userMe: ME<User> }) {
+    super('User', 'Update', { userMe })
   }
 }
 
@@ -29,7 +41,9 @@ export class Delete extends ProtocolCommand {
 export default {
   serviceName: "User",
   Request,
+  List,
   Update,
   Create,
   Delete,
+  ListById,
 }

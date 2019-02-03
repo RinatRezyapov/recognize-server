@@ -7,3 +7,9 @@ export {
   ServerResponseObjectResolved, 
   ServerResponseObjectsListResolved 
 } from './domain/ServerResponse';
+export {
+  Expression,
+  ExpressionEq,
+  ExpressionContains,
+} from './domain/Expression';
+export { default as SearchQuery } from './domain/SearchQuery';

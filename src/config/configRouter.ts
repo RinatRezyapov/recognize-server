@@ -1,10 +1,9 @@
 import * as express from 'express';
 import * as jwt from 'jsonwebtoken';
-import UserModel from '../models/user';
-import { User } from '../api/entities';
-import { fromNullable } from 'fp-ts/lib/Option';
-export const SECRET = 'server secret';
-export const TOKENTIME = 120 * 60;
+import FilesModel from '../models/files';
+import { handleFilesApi } from '../commandHandlers/files';
+const SECRET = 'server secret';
+const TOKENTIME = 120 * 60;
 
 export const configRouter = (passport: any) => {
   const router = express.Router();
@@ -16,6 +15,8 @@ export const configRouter = (passport: any) => {
   router.post('/signup', passport.authenticate('local-signup', {
     session: false
   }), generateToken, respond);
+
+  router.get('/file/:id', handleFilesApi);
 
   return router;
 }

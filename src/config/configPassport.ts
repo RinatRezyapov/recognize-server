@@ -3,9 +3,8 @@ import { Strategy } from 'passport-local';
 import * as passport from 'passport';
 import Auth from '../models/auth';
 import UserModel from '../models/user';
-import { wsSend } from './configWebSocket';
 import { User } from '../api/entities';
-import { fromNullable } from 'fp-ts/lib/Option';
+import { none } from 'fp-ts/lib/Option';
 
 export const configPassport = () => {
   passport.use('local-signup', new Strategy({
@@ -27,8 +26,12 @@ export const configPassport = () => {
           newUser.save(async (err: any) => {
             if (err) throw err;
             const name = req.body.name;
-            const avatar = '';
-            const userDbResponse = await UserModel.create({ _id: newUser._id, data: new User({ name, email, avatar }) });
+            const joinedDate = req.body.joinedDate;
+            const avatar = none;
+            const courses = [];
+            const followers = [];
+            const following = [];
+            await UserModel.create({ _id: newUser._id, data: new User({ name, email, avatar, joinedDate, courses, followers, following }) });
             return done(null, newUser);
           });
         }

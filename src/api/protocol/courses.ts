@@ -4,25 +4,43 @@ import { fromJSON } from './JSON';
 
 export class Create extends ProtocolCommand {
   constructor({ course }: { course: Course }) {
-    super('EventLines', 'Create', { course })
+    super('Courses', 'Create', { course })
   }
 }
 
 export class List extends ProtocolCommand {
   constructor({ userId }: { userId: Id<User> }) {
-    super('EventLines', 'List', { userId })
+    super('Courses', 'List', { userId })
   }
 }
 
 export class Update extends ProtocolCommand {
   constructor({ courseMe }: { courseMe: ME<Course> }) {
-    super('EventLines', 'Update', { courseMe })
+    super('Courses', 'Update', { courseMe })
   }
 }
 
 export class Delete extends ProtocolCommand {
   constructor({ courseId }: { courseId: Id<Course> }) {
-    super('EventLines', 'Delete', { courseId })
+    super('Courses', 'Delete', { courseId })
+  }
+}
+
+export class Request extends ProtocolCommand {
+  constructor({ courseId }: { courseId: Id<Course> }) {
+    super('Courses', 'Request', { courseId })
+  }
+}
+
+export class ListAll extends ProtocolCommand {
+  constructor() {
+    super('Courses', 'ListAll', {})
+  }
+}
+
+export class ListIds extends ProtocolCommand {
+  constructor({ courseIds }: { courseIds: Array<Id<Course>> }) {
+    super('Courses', 'ListIds', { courseIds })
   }
 }
 
@@ -32,4 +50,7 @@ export default {
   Update,
   Create,
   Delete,
+  Request,
+  ListAll,
+  ListIds,
 }

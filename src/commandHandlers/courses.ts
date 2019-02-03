@@ -12,50 +12,60 @@ import {
   ServerResponseObjectsListResolved,
 } from '../api/entities';
 import CourseModel from '../models/course';
+import UserModel from '../models/user';
 import { wsSend } from '../config/configWebSocket';
+import { addCourseToUserCourses, removeCourseFromUserCourses } from './user';
 
-export const handleCourseCommand = async (parsedMsg: ProtocolCommand, ws: any) => {
+const constructCourse = (v) => {
+  return new ME<Course>({
+    id: new Id<Course>({ value: v._id }),
+    entity: new Course({
+      name: v.data.name,
+      data: v.data.data,
+      owner: v.data.owner,
+      picture: v.data.picture,
+      description: v.data.description,
+      shortDescription: v.data.shortDescription,
+      tags: v.data.tags,
+      createdDate: v.data.createdDate,
+      modifiedDate: v.data.modifiedDate,
+      language: v.data.language,
+      enrolled: v.data.enrolled,
+      likes: v.data.likes,
+    })
+  })
+}
 
-  fromNullable(ProtocolCourses[parsedMsg.method]).map(async Constructor => {
-    const command = new Constructor(fromJSON(parsedMsg.data));
+
+export const handleCourseCommand = async (msg: ProtocolCommand, ws: any) => {
+
+  fromNullable(ProtocolCourses[msg.method]).map(async Constructor => {
+    const command = new Constructor(fromJSON(msg.data));
     if (command instanceof ProtocolCourses.Create) {
       const course = command.data.course as Course;
-      const dbResponse = await CourseModel.create({ data: course });
-      wsSend(
-        ws,
-        new ServerResponse({
-          msgId: parsedMsg.id,
-          data: [1, new ServerResponseObjectResolved({
-            data: new ME<Course>({ id: new Id<Course>({ value: dbResponse._id }), entity: dbResponse.data })
-          })]
-        })
-      )
-    } else if (command instanceof ProtocolCourses.List) {
-      fromNullable(command.data.userId).map(async (userId: Id<User>) => {
-        const dbResponse = await CourseModel.find({ 'data.owner.value': userId.value });
+      const response = await CourseModel.create({ data: course });
+      fromNullable(response).map(response => {
+        addCourseToUserCourses(response);
         wsSend(
           ws,
           new ServerResponse({
-            msgId: parsedMsg.id,
+            msgId: msg.id,
+            data: [1, new ServerResponseObjectResolved({
+              data: constructCourse(response)
+            })]
+          })
+        )
+      })
+    } else if (command instanceof ProtocolCourses.List) {
+      fromNullable(command.data.userId).map(async (userId: Id<User>) => {
+        const response = await CourseModel.find({ 'data.owner.value': userId.value });
+        wsSend(
+          ws,
+          new ServerResponse({
+            msgId: msg.id,
             data: [1, new ServerResponseObjectsListResolved({
-              data: dbResponse.map(v =>
-                new ME<Course>({
-                  id: new Id<Course>({ value: v._id }),
-                  entity: new Course({
-                    name: v.data.name,
-                    data: v.data.data,
-                    owner: v.data.owner,
-                    picture: v.data.picture,
-                    description: v.data.description,
-                    shortDescription: v.data.shortDescription,
-                    tags: v.data.tags,
-                    createdDate: v.data.createdDate,
-                    modifiedDate: v.data.modifiedDate,
-                    language: v.data.language,
-                    enrolled: v.data.enrolled,
-                    likes: v.data.likes,
-                  })
-                })
+              data: response.map(response =>
+                constructCourse(response)
               )
             })]
           })
@@ -63,28 +73,74 @@ export const handleCourseCommand = async (parsedMsg: ProtocolCommand, ws: any) =
       })
     } else if (command instanceof ProtocolCourses.Update) {
       const courseMe = command.data.courseMe as ME<Course>;
-      const dbResponse = await CourseModel.findByIdAndUpdate(courseMe.id.value, { data: courseMe.entity }, { new: true });
-
+      const response = await CourseModel.findByIdAndUpdate(courseMe.id.value, { data: courseMe.entity }, { new: true });
       wsSend(
         ws,
         new ServerResponse({
-          msgId: parsedMsg.id,
+          msgId: msg.id,
           data: [1, new ServerResponseObjectResolved({
-            data: new ME<Course>({ id: new Id<Course>({ value: dbResponse._id }), entity: dbResponse.data })
+            data: constructCourse(response)
           })]
         })
       )
     } else if (command instanceof ProtocolCourses.Delete) {
       fromNullable(command.data.courseId).map(async (courseId: Id<Course>) => {
-        const dbResponse = await CourseModel.findByIdAndRemove(courseId.value);
-        wsSend(
-          ws,
-          new ServerResponse({
-            msgId: parsedMsg.id,
-            data: [1, new ServerResponseObjectResolved({
-              data: new Id<Course>({ value: dbResponse._id })
-            })]
-          })
+        const response = await CourseModel.findByIdAndRemove(courseId.value);
+        fromNullable(response).map(response => {
+          removeCourseFromUserCourses(response);
+          wsSend(
+            ws,
+            new ServerResponse({
+              msgId: msg.id,
+              data: [1, new ServerResponseObjectResolved({
+                data: new Id<Course>({ value: response._id })
+              })]
+            })
+          )
+        })
+      })
+    } else if (command instanceof ProtocolCourses.Request) {
+      const courseId = command.data.courseId as Id<Course>;
+      const response = await CourseModel.findById(courseId);
+
+      wsSend(
+        ws,
+        new ServerResponse({
+          msgId: msg.id,
+          data: [1, new ServerResponseObjectsListResolved({
+            data: [constructCourse(response)]
+          })]
+        })
+      )
+    } else if (command instanceof ProtocolCourses.ListAll) {
+      const response = await CourseModel.find();
+
+      wsSend(
+        ws,
+        new ServerResponse({
+          msgId: msg.id,
+          data: [1, new ServerResponseObjectsListResolved({
+            data: response.map(response =>
+              constructCourse(response)
+            )
+          })]
+        })
+      )
+    } else if (command instanceof ProtocolCourses.ListIds) {
+      fromNullable(command.data.courseIds).map(async (courseIds: Array<Id<Course>>) => {
+        const response = await CourseModel.find().where('_id').in(courseIds.map(v => v.value));
+        fromNullable(response).map(response =>
+          wsSend(
+            ws,
+            new ServerResponse({
+              msgId: msg.id,
+              data: [1, new ServerResponseObjectsListResolved({
+                data: response.map(response =>
+                  constructCourse(response)
+                )
+              })]
+            })
+          )
         )
       })
     }
