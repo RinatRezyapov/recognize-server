@@ -13,9 +13,21 @@ class Request extends ProtocolCommand_1.default {
     }
 }
 exports.Request = Request;
+class List extends ProtocolCommand_1.default {
+    constructor() {
+        super('User', 'List');
+    }
+}
+exports.List = List;
+class ListById extends ProtocolCommand_1.default {
+    constructor({ userIds }) {
+        super('User', 'ListById', { userIds });
+    }
+}
+exports.ListById = ListById;
 class Update extends ProtocolCommand_1.default {
-    constructor({ courseMe }) {
-        super('User', 'Update', { courseMe });
+    constructor({ userMe }) {
+        super('User', 'Update', { userMe });
     }
 }
 exports.Update = Update;
@@ -28,8 +40,10 @@ exports.Delete = Delete;
 exports.default = {
     serviceName: "User",
     Request,
+    List,
     Update,
     Create,
     Delete,
+    ListById,
 };
 //# sourceMappingURL=user.js.map

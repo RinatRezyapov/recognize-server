@@ -1,0 +1,1 @@
+{"version":3,"file":"files.js","sourceRoot":"","sources":["../../../src/api/protocol/files.ts"],"names":[],"mappings":";;AAAA,uDAAgD;AAEhD,MAAa,IAAK,SAAQ,yBAAe;IACvC,YAAY,IAAiB;QAC3B,KAAK,CAAC,OAAO,EAAE,MAAM,EAAE,EAAE,IAAI,EAAE,CAAC,CAAA;IAClC,CAAC;CACF;AAJD,oBAIC;AAED,kBAAe;IACb,WAAW,EAAE,OAAO;IACpB,IAAI;CACL,CAAA"}

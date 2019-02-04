@@ -13,6 +13,7 @@ const passport = require("passport");
 const auth_1 = require("../models/auth");
 const user_1 = require("../models/user");
 const entities_1 = require("../api/entities");
+const Option_1 = require("fp-ts/lib/Option");
 exports.configPassport = () => {
     passport.use('local-signup', new passport_local_1.Strategy({
         usernameField: 'email',
@@ -33,8 +34,12 @@ exports.configPassport = () => {
                     if (err)
                         throw err;
                     const name = req.body.name;
-                    const avatar = '';
-                    const userDbResponse = yield user_1.default.create({ _id: newUser._id, data: new entities_1.User({ name, email, avatar }) });
+                    const joinedDate = req.body.joinedDate;
+                    const avatar = Option_1.none;
+                    const courses = [];
+                    const followers = [];
+                    const following = [];
+                    yield user_1.default.create({ _id: newUser._id, data: new entities_1.User({ name, email, avatar, joinedDate, courses, followers, following }) });
                     return done(null, newUser);
                 }));
             }

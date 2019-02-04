@@ -7,7 +7,7 @@ const configMongoose_1 = require("./config/configMongoose");
 const configPassport_1 = require("./config/configPassport");
 const configRouter_1 = require("./config/configRouter");
 const configWebSocket_1 = require("./config/configWebSocket");
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 3000;
 configMongoose_1.mongooseConnect();
 const passport = configPassport_1.configPassport();
 const router = configRouter_1.configRouter(passport);
