@@ -14,6 +14,6 @@ class User extends ProtocolObject_1.default {
         this.following = following;
     }
 }
-User.$Type = new TypeId_1.default({ value: 'User' });
 exports.default = User;
+User.$Type = new TypeId_1.default({ value: 'User' });
 //# sourceMappingURL=User.js.map

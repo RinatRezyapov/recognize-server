@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
+require('dotenv').config()
 
 import { mongooseConnect } from './config/configMongoose';
 import { configPassport } from './config/configPassport';

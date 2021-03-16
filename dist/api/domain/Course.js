@@ -19,6 +19,6 @@ class Course extends ProtocolObject_1.default {
         this.likes = likes;
     }
 }
-Course.$Type = new TypeId_1.default({ value: 'Course' });
 exports.default = Course;
+Course.$Type = new TypeId_1.default({ value: 'Course' });
 //# sourceMappingURL=Course.js.map

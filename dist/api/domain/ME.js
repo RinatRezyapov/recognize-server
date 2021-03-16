@@ -9,6 +9,6 @@ class ME extends ProtocolObject_1.default {
         this.entity = entity;
     }
 }
-ME.$Type = new TypeId_1.default({ value: 'ME' });
 exports.default = ME;
+ME.$Type = new TypeId_1.default({ value: 'ME' });
 //# sourceMappingURL=ME.js.map

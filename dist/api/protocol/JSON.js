@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.fromJSON = void 0;
 const lodash = require("lodash");
 const typeConstructors_1 = require("../typeConstructors");
-exports.fromJSON = (data) => {
+const fromJSON = (data) => {
     const typeOf = typeof data;
     if (!data) {
         return data;
@@ -20,12 +21,13 @@ exports.fromJSON = (data) => {
         return fromJSONArray(data);
     }
     else if (!data.hasOwnProperty("tpe")) {
-        return Object.keys(data).reduce((acc, curr) => (Object.assign({}, acc, { [curr]: exports.fromJSON(data[curr]) })), {});
+        return Object.keys(data).reduce((acc, curr) => ({ ...acc, [curr]: exports.fromJSON(data[curr]) }), {});
     }
     else {
         return fromJSONObject(data);
     }
 };
+exports.fromJSON = fromJSON;
 const fromJSONArray = (data) => {
     return data.map(v => exports.fromJSON(v));
 };

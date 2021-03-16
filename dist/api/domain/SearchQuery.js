@@ -11,6 +11,6 @@ class SearchQuery extends ProtocolObject_1.default {
         this.value = value;
     }
 }
-SearchQuery.$Type = new TypeId_1.default({ value: 'SearchQuery' });
 exports.default = SearchQuery;
+SearchQuery.$Type = new TypeId_1.default({ value: 'SearchQuery' });
 //# sourceMappingURL=SearchQuery.js.map

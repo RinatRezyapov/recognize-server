@@ -1,11 +1,11 @@
 import * as mongoose from 'mongoose';
 
 const dbConfig = {
-  'url': 'mongodb://test777:test777@ds125293.mlab.com:25293/recognize',
+  'url': `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/recognize?retryWrites=true&w=majority`,
 }
 
 export const mongooseConnect = () => {
-  mongoose.connection.openUri(dbConfig.url)
-  .once('open', () => console.log('Connected to database: ' + dbConfig.url))
-  .on('error', (error) => console.warn('Database connection error', error));
+  mongoose.connection.openUri(dbConfig.url, { useUnifiedTopology: true, useNewUrlParser: true })
+    .then(r => console.log('Connected to database', process.env.DB_HOST))
+    .catch(e => console.log('Database connection error', e))
 }

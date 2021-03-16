@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SignInCommand = void 0;
 const ProtocolCommand_1 = require("./ProtocolCommand");
 class SignInCommand extends ProtocolCommand_1.default {
     constructor(email, password, token) {

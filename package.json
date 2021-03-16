@@ -6,7 +6,7 @@
     },
     "scripts": {
         "build": "tsc",
-        "dev": "ts-node ./app/server.ts",
+        "dev": "ts-node ./src/server.ts",
         "start": "node ./dist/server.js",
         "prod": "npm run build && npm start"
     },
@@ -18,7 +18,6 @@
         "@types/jsonwebtoken": "^8.3.0",
         "@types/lodash": "^4.14.118",
         "@types/lodash-es": "^4.17.1",
-        "@types/mongoose": "^5.3.1",
         "@types/passport": "^0.4.7",
         "@types/passport-local": "^1.0.33",
         "@types/uuid": "^3.4.4",
@@ -26,12 +25,14 @@
         "bcrypt-nodejs": "latest",
         "body-parser": "^1.15.2",
         "cors": "^2.8.4",
-        "express": "~4.14.0",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
         "fp-ts": "^1.10.0",
         "jsonwebtoken": "^8.3.0",
-        "lodash": "^4.17.11",
+        "lodash": "^4.17.20",
         "lodash-es": "^4.17.11",
-        "mongoose": "~4.13.1",
+        "mongodb": "^3.6.4",
+        "mongoose": "^5.11.15",
         "nodemon": "^1.18.4",
         "passport": "~0.3.2",
         "passport-facebook": "~2.1.1",
@@ -40,5 +41,8 @@
         "passport-twitter": "~1.0.4",
         "uuid": "^3.3.2",
         "ws": "^6.1.0"
+    },
+    "devDependencies": {
+        "@types/node": "^14.14.35"
     }
 }

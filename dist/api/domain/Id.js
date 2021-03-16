@@ -8,6 +8,6 @@ class Id extends ProtocolObject_1.default {
         this.value = value;
     }
 }
-Id.$Type = new TypeId_1.default({ value: 'Id' });
 exports.default = Id;
+Id.$Type = new TypeId_1.default({ value: 'Id' });
 //# sourceMappingURL=Id.js.map

@@ -8,6 +8,6 @@ class File extends ProtocolObject_1.default {
         this.name = name;
     }
 }
-File.$Type = new TypeId_1.default({ value: 'File' });
 exports.default = File;
+File.$Type = new TypeId_1.default({ value: 'File' });
 //# sourceMappingURL=File.js.map

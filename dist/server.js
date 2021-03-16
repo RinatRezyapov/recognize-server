@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+require('dotenv').config();
 const configMongoose_1 = require("./config/configMongoose");
 const configPassport_1 = require("./config/configPassport");
 const configRouter_1 = require("./config/configRouter");
