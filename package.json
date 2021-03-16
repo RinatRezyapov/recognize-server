@@ -5,7 +5,7 @@
         "node": "8.6.0"
     },
     "scripts": {
-        "build": "node ./dist/server.js",
+        "build": "tsc",
         "dev": "ts-node ./src/server.ts",
         "start": "node ./dist/server.js",
         "prod": "npm run build && npm start"
@@ -43,6 +43,7 @@
         "ws": "^6.1.0"
     },
     "devDependencies": {
-        "@types/node": "^14.14.35"
+        "@types/node": "^14.14.35",
+        "tsc": "^1.20150623.0"
     }
 }
