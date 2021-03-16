@@ -30,7 +30,7 @@
         "fp-ts": "^1.10.0",
         "jsonwebtoken": "^8.3.0",
         "lodash": "^4.17.20",
-        "lodash-es": "^4.17.11",
+        "lodash-es": "^4.17.14",
         "mongodb": "^3.6.4",
         "mongoose": "^5.11.15",
         "nodemon": "^1.18.4",
