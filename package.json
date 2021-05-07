@@ -28,7 +28,7 @@
         "express": "^4.17.1",
         "fp-ts": "^1.10.0",
         "jsonwebtoken": "^8.3.0",
-        "lodash": "^4.17.20",
+        "lodash": "^4.17.21",
         "lodash-es": "^4.17.11",
         "mongodb": "^3.6.4",
         "mongoose": "^5.11.15",
